@@ -1,0 +1,219 @@
+// Modbus RTU-TCP Bridge for WiFi - Elfin EW11
+Bridge modbus:tcp:felicity "Felicity BMS - TCP Bridge" [
+    host="192.168.6.126",
+    port=9999,
+    id=1,
+    timeBetweenTransactionsMillis=60,
+    connectTimeoutMillis=2000,
+    reconnectAfterMillis=60000
+] {
+
+    // -------------------------
+    // Battery Info (0x1300)
+    // -------------------------
+    Bridge poller pollerBatteryInfo "Felicity BMS - Battery Info Poller" [
+        start=4864,
+        length=42,
+        refresh=5000,
+        type="holding"
+    ] {
+        Thing data batteryVoltage     "Felicity BMS - Battery Voltage"     [ readStart="4870", readValueType="uint16", readTransform="JS(divide100.js)" ]
+        Thing data batteryCurrent     "Felicity BMS - Battery Current"     [ readStart="4871", readValueType="int16",  readTransform="JS(divide10.js)" ]
+        Thing data batteryTemp        "Felicity BMS - Battery Temperature" [ readStart="4874", readValueType="uint16" ]
+        Thing data soc                "Felicity BMS - State of Charge"     [ readStart="4875", readValueType="uint16" ]
+        Thing data soh                "Felicity BMS - State of Health"     [ readStart="4876", readValueType="uint16" ]
+        Thing data cycles             "Felicity BMS - Cycle Count"         [ readStart="4877", readValueType="uint16" ]
+        Thing data cellCount          "Felicity BMS - Cell Count"          [ readStart="4900", readValueType="uint16" ]
+        Thing data ntcCount           "Felicity BMS - NTC Count"           [ readStart="4902", readValueType="uint16" ]
+    }
+
+    // -------------------------
+    // Cell Info (0x132A)
+    // -------------------------
+    Bridge poller pollerCellInfo "Felicity BMS - Cell Info Poller" [
+        start=4906,
+        length=32,
+        refresh=5000,
+        type="holding"
+    ] {
+        Thing data maxCellVoltage     "Felicity BMS - Max Cell Voltage"     [ readStart="4906", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data maxCellIndex       "Felicity BMS - Max Cell Index"       [ readStart="4907", readValueType="uint16" ]
+        Thing data minCellVoltage     "Felicity BMS - Min Cell Voltage"     [ readStart="4908", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data minCellIndex       "Felicity BMS - Min Cell Index"       [ readStart="4909", readValueType="uint16" ]
+
+        Thing data temp1              "Felicity BMS - Temperature Sensor 1" [ readStart="4910", readValueType="uint16" ]
+        Thing data temp2              "Felicity BMS - Temperature Sensor 2" [ readStart="4911", readValueType="uint16" ]
+        Thing data temp3              "Felicity BMS - Temperature Sensor 3" [ readStart="4912", readValueType="uint16" ]
+        Thing data temp4              "Felicity BMS - Temperature Sensor 4" [ readStart="4913", readValueType="uint16" ]
+
+        Thing data cell1              "Felicity BMS - Cell 1 Voltage"       [ readStart="4914", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell2              "Felicity BMS - Cell 2 Voltage"       [ readStart="4915", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell3              "Felicity BMS - Cell 3 Voltage"       [ readStart="4916", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell4              "Felicity BMS - Cell 4 Voltage"       [ readStart="4917", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell5              "Felicity BMS - Cell 5 Voltage"       [ readStart="4918", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell6              "Felicity BMS - Cell 6 Voltage"       [ readStart="4919", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell7              "Felicity BMS - Cell 7 Voltage"       [ readStart="4920", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell8              "Felicity BMS - Cell 8 Voltage"       [ readStart="4921", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell9              "Felicity BMS - Cell 9 Voltage"       [ readStart="4922", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell10             "Felicity BMS - Cell 10 Voltage"      [ readStart="4923", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell11             "Felicity BMS - Cell 11 Voltage"      [ readStart="4924", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell12             "Felicity BMS - Cell 12 Voltage"      [ readStart="4925", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell13             "Felicity BMS - Cell 13 Voltage"      [ readStart="4926", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell14             "Felicity BMS - Cell 14 Voltage"      [ readStart="4927", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell15             "Felicity BMS - Cell 15 Voltage"      [ readStart="4928", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell16             "Felicity BMS - Cell 16 Voltage"      [ readStart="4929", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+    }
+
+    // -------------------------
+    // Status / Limits (0x2320)
+    // -------------------------
+    Bridge poller pollerStatus "Felicity BMS - Status & Limits Poller" [
+        start=8992,
+        length=64,
+        refresh=10000,
+        type="holding"
+    ] {
+        Thing data cellHighAlarm      "Felicity BMS - Cell High Alarm"        [ readStart="8997", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cellHighBack       "Felicity BMS - Cell High Alarm Back"   [ readStart="8998", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cellMaxVoltage     "Felicity BMS - Cell Max Voltage"       [ readStart="9001", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell95Voltage      "Felicity BMS - Cell 95% Voltage"       [ readStart="9002", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cell05Voltage      "Felicity BMS - Cell 5% Voltage"        [ readStart="9003", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+        Thing data cellEmptyVoltage   "Felicity BMS - Cell Empty Voltage"     [ readStart="9004", readValueType="uint16", readTransform="JS(divide1000.js)" ]
+
+        Thing data chargeLimit        "Felicity BMS - Charge Limit"           [ readStart="9032", readValueType="uint16", readTransform="JS(divide10.js)" ]
+        Thing data chargeLimitBack    "Felicity BMS - Charge Limit Back"      [ readStart="9033", readValueType="uint16", readTransform="JS(divide10.js)" ]
+        Thing data dischargeLimit     "Felicity BMS - Discharge Limit"        [ readStart="9034", readValueType="uint16", readTransform="JS(divide10.js)" ]
+    }
+}
+
+/* 
+==============================================================
+   FELICITY BMS – REGISTERMAP (Modbus Holding Registers)
+==============================================================
+
+--------------------------------------------------------------
+ BATTERY INFO BLOCK (Start 0x1300 = 4864) – Länge 42 Register
+--------------------------------------------------------------
+REQUEST: 01 03 13 00 00 2A C0 91 
+(01 Slave‑ID, 03 Function Code (Read Holding Registers), 13 00 Startadresse (4864), 00 2A Anzahl Register = 42, C0 91 CRC‑16)
+Dec     Hex     Beschreibung                         Skalierung
+4864    1300    Unbekannt                             -
+4865    1301    Unbekannt                             -
+4866    1302    Unbekannt                             -
+4867    1303    -
+4868    1304    -
+4869    1305    -
+4870    1306    Batteriespannung                      ×0.01 V
+4871    1307    Batteriestrom (signed)                ×0.1 A
+4872    1308    -
+4873    1309    -
+4874    1310    Batterietemperatur                    °C
+4875    1311    SOC                                   %
+4876    1312    SOH                                   %
+4877    1313    Zyklen                                -
+4878    1314    -
+4879    1315    -
+4880    1316    -
+4881    1317    -
+4882    1318    -
+4883    1319    -
+4884    131A    -
+4885    131B    -
+4886    131C    -
+4887    131D    -
+4888    131E    -
+4889    131F    -
+4890    1320    -
+4891    1321    -
+4892    1322    -
+4893    1323    -
+4894    1324    Unbekannt                             -
+4895    1325    Unbekannt                             -
+4896    1326    Max Cell Voltage (raw)                ×0.001 V
+4897    1327    Max Cell Index                        -
+4898    1328    Min Cell Voltage (raw)                ×0.001 V
+4899    1329    Min Cell Index                        -
+4900    132A    Cell Count                            -
+4901    132B    -
+4902    132C    NTC Count                             -
+4903    132D    -
+4904    132E    Temp (min/avg/max)                    °C
+4905    132F    Temp (min/avg/max)                    °C
+
+
+--------------------------------------------------------------
+ CELL INFO BLOCK (Start 0x132A = 4906) – Länge 32 Register
+--------------------------------------------------------------
+REQUEST: 01 03 13 2A 00 20 61 5E
+Dec     Hex     Beschreibung                         Skalierung
+4906    132A    Max Cell Voltage (raw)                ×0.001 V
+4907    132B    Max Cell Index                        -
+4908    132C    Min Cell Voltage (raw)                ×0.001 V
+4909    132D    Min Cell Index                        -
+4910    132E    Temp Sensor 1                         °C
+4911    132F    Temp Sensor 2                         °C
+4912    1330    Temp Sensor 3                         °C
+4913    1331    Temp Sensor 4                         °C
+
+-- Zellspannungen (16 Zellen, je ×0.001 V)
+4914    1332    Cell 1 Voltage
+4915    1333    Cell 2 Voltage
+4916    1334    Cell 3 Voltage
+4917    1335    Cell 4 Voltage
+4918    1336    Cell 5 Voltage
+4919    1337    Cell 6 Voltage
+4920    1338    Cell 7 Voltage
+4921    1339    Cell 8 Voltage
+4922    133A    Cell 9 Voltage
+4923    133B    Cell 10 Voltage
+4924    133C    Cell 11 Voltage
+4925    133D    Cell 12 Voltage
+4926    133E    Cell 13 Voltage
+4927    133F    Cell 14 Voltage
+4928    1340    Cell 15 Voltage
+4929    1341    Cell 16 Voltage
+
+
+--------------------------------------------------------------
+ STATUS / LIMITS BLOCK (Start 0x2320 = 8992) – Länge 64 Register
+--------------------------------------------------------------
+REQUEST: 01 03 23 20 00 40 4E 74 
+(01 Slave‑ID, 03 Read Holding Registers, 23 20 Startadresse (8992), 00 40 Anzahl Register = 64, 4E 74 CRC‑16)
+Dec     Hex     Beschreibung                         Skalierung
+8992    2320    Status                                -
+8993    2321    -
+8994    2322    Charge Limit (A×10)                   ×0.1 A
+8995    2323    NTC Count                             -
+8996    2324    Min Cell Voltage (raw)                ×0.001 V
+8997    2325    Cell High Alarm                       ×0.001 V
+8998    2326    Cell High Alarm Back                  ×0.001 V
+8999    2327    -
+9000    2328    -
+9001    2329    Max Cell Voltage (Soll)               ×0.001 V
+9002    232A    95% SoC Voltage                       ×0.001 V
+9003    232B    5% SoC Voltage                        ×0.001 V
+9004    232C    Empty Voltage                         ×0.001 V
+9005    232D    Cell High Alarm                       ×0.001 V
+9006    232E    Temp High Alarm                       °C?
+9007    232F    Temperatur                            °C
+9008–9023        Diverse interne Werte                -
+
+-- Temperatur-Rohwerte
+9024    2360    Temp raw 1                            -
+9025    2361    Temp raw 2                            -
+9026    2362    Temp raw 3                            -
+9027    2363    Temp raw 4                            -
+9028    2364    Temp raw 5                            -
+9029    2365    Temp raw 6                            -
+9030    2366    Temp raw 7                            -
+9031    2367    Temp raw 8                            -
+
+-- Stromlimits
+9032    2370    Charge Limit                          ×0.1 A
+9033    2371    Charge Limit Back                     ×0.1 A
+9034    2372    Discharge Limit                       ×0.1 A
+
+9035–9055        Fehlerflags / Statusbits             -
+
+==============================================================
+*/
