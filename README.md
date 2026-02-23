@@ -129,20 +129,6 @@
 <tr><td>9008–9023</td><td>2330–233F</td><td>Diverse interne Werte</td><td>-</td><td></td></tr>
 </table>
 
-<h3>🌡️ Temperatur‑Rohwerte</h3>
-
-<table>
-<tr><th>Dec</th><th>Hex</th><th>Beschreibung</th></tr>
-<tr><td>9024</td><td>2360</td><td>Temp raw 1</td></tr>
-<tr><td>9025</td><td>2361</td><td>Temp raw 2</td></tr>
-<tr><td>9026</td><td>2362</td><td>Temp raw 3</td></tr>
-<tr><td>9027</td><td>2363</td><td>Temp raw 4</td></tr>
-<tr><td>9028</td><td>2364</td><td>Temp raw 5</td></tr>
-<tr><td>9029</td><td>2365</td><td>Temp raw 6</td></tr>
-<tr><td>9030</td><td>2366</td><td>Temp raw 7</td></tr>
-<tr><td>9031</td><td>2367</td><td>Temp raw 8</td></tr>
-</table>
-
 <h3>⚡ Stromlimits</h3>
 
 <table>
