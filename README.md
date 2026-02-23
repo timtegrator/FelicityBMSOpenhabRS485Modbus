@@ -1,131 +1,163 @@
-Some rough estimates what the registers might be. 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
 
-==============================================================
-   FELICITY BMS – REGISTERMAP (Modbus Holding Registers)
-==============================================================
+</head>
+<body>
 
---------------------------------------------------------------
- BATTERY INFO BLOCK (Start 0x1300 = 4864) – Länge 42 Register
---------------------------------------------------------------
-REQUEST: 01 03 13 00 00 2A C0 91 
-(01 Slave‑ID, 03 Function Code (Read Holding Registers), 13 00 Startadresse (4864), 00 2A Anzahl Register = 42, C0 91 CRC‑16)
-Dec     Hex     Beschreibung                         Skalierung        Verified
-4864    1300    Unbekannt                             -
-4865    1301    Unbekannt                             -
-4866    1302    Unbekannt                             -
-4867    1303    -
-4868    1304    -
-4869    1305    -
-4870    1306    Batteriespannung                      ×0.01 V         OK
-4871    1307    Batteriestrom (signed)                ×0.1 A          OK
-4872    1308    -
-4873    1309    -
-4874    1310    Batterietemperatur                    °C
-4875    1311    SOC                                   %               OK
-4876    1312    SOH                                   %
-4877    1313    Zyklen                                -               OK
-4878    1314    -
-4879    1315    -
-4880    1316    -
-4881    1317    -
-4882    1318    -
-4883    1319    -
-4884    131A    -
-4885    131B    -
-4886    131C    -
-4887    131D    -
-4888    131E    -
-4889    131F    -
-4890    1320    -
-4891    1321    -
-4892    1322    -
-4893    1323    -
-4894    1324    Unbekannt                             -
-4895    1325    Unbekannt                             -
-4896    1326    Max Cell Voltage (raw)                ×0.001 V       OK
-4897    1327    Max Cell Index                        -
-4898    1328    Min Cell Voltage (raw)                ×0.001 V       OK
-4899    1329    Min Cell Index                        -
-4900    132A    Cell Count                            -
-4901    132B    -
-4902    132C    NTC Count                             -
-4903    132D    -
-4904    132E    Temp (min/avg/max)                    °C
-4905    132F    Temp (min/avg/max)                    °C
+<h1>Felicity BMS – Modbus Registermap</h1>
+<p><em>Some rough estimates what the registers might be.</em></p>
 
+<hr>
 
---------------------------------------------------------------
- CELL INFO BLOCK (Start 0x132A = 4906) – Länge 32 Register
---------------------------------------------------------------
-REQUEST: 01 03 13 2A 00 20 61 5E
-Dec     Hex     Beschreibung                         Skalierung        Verified
-4906    132A    Max Cell Voltage (raw)                ×0.001 V
-4907    132B    Max Cell Index                        -
-4908    132C    Min Cell Voltage (raw)                ×0.001 V
-4909    132D    Min Cell Index                        -
-4910    132E    Temp Sensor 1                         °C               OK
-4911    132F    Temp Sensor 2                         °C               OK
-4912    1330    Temp Sensor 3                         °C               OK
-4913    1331    Temp Sensor 4                         °C               OK
+<div class="section">
+<h2>🔋 Battery Info Block</h2>
+<p><strong>Start:</strong> 0x1300 (= 4864)<br>
+<strong>Länge:</strong> 42 Register</p>
 
--- Zellspannungen (16 Zellen, je ×0.001 V)
-4914    1332    Cell 1 Voltage                                         OK
-4915    1333    Cell 2 Voltage                                         OK
-4916    1334    Cell 3 Voltage                                         OK
-4917    1335    Cell 4 Voltage                                         OK
-4918    1336    Cell 5 Voltage                                         OK
-4919    1337    Cell 6 Voltage                                         OK
-4920    1338    Cell 7 Voltage                                         OK
-4921    1339    Cell 8 Voltage                                         OK
-4922    133A    Cell 9 Voltage                                         OK
-4923    133B    Cell 10 Voltage                                        OK
-4924    133C    Cell 11 Voltage                                        OK
-4925    133D    Cell 12 Voltage                                        OK
-4926    133E    Cell 13 Voltage                                        OK
-4927    133F    Cell 14 Voltage                                        OK
-4928    1340    Cell 15 Voltage                                        OK
-4929    1341    Cell 16 Voltage                                        OK
+<h3>📤 Request</h3>
+<pre><code>01 03 13 00 00 2A C0 91</code></pre>
+<p>01 Slave‑ID, 03 Function Code, 13 00 Startadresse, 00 2A Anzahl Register, C0 91 CRC‑16</p>
 
+<table>
+<tr><th>Dec</th><th>Hex</th><th>Beschreibung</th><th>Skalierung</th><th>Verified</th></tr>
+<tr><td>4864</td><td>1300</td><td>Unbekannt</td><td>-</td><td></td></tr>
+<tr><td>4865</td><td>1301</td><td>Unbekannt</td><td>-</td><td></td></tr>
+<tr><td>4866</td><td>1302</td><td>Unbekannt</td><td>-</td><td></td></tr>
+<tr><td>4867</td><td>1303</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>4868</td><td>1304</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>4869</td><td>1305</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>4870</td><td>1306</td><td>Batteriespannung</td><td>×0.01 V</td><td>OK</td></tr>
+<tr><td>4871</td><td>1307</td><td>Batteriestrom (signed)</td><td>×0.1 A</td><td>OK</td></tr>
+<tr><td>4872</td><td>1308</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>4873</td><td>1309</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>4874</td><td>1310</td><td>Batterietemperatur</td><td>°C</td><td></td></tr>
+<tr><td>4875</td><td>1311</td><td>SOC</td><td>%</td><td>OK</td></tr>
+<tr><td>4876</td><td>1312</td><td>SOH</td><td>%</td><td></td></tr>
+<tr><td>4877</td><td>1313</td><td>Zyklen</td><td>-</td><td>OK</td></tr>
+<tr><td>4878–4893</td><td>1314–1323</td><td>Diverse interne Werte</td><td>-</td><td></td></tr>
+<tr><td>4894</td><td>1324</td><td>Unbekannt</td><td>-</td><td></td></tr>
+<tr><td>4895</td><td>1325</td><td>Unbekannt</td><td>-</td><td></td></tr>
+<tr><td>4896</td><td>1326</td><td>Max Cell Voltage (raw)</td><td>×0.001 V</td><td>OK</td></tr>
+<tr><td>4897</td><td>1327</td><td>Max Cell Index</td><td>-</td><td></td></tr>
+<tr><td>4898</td><td>1328</td><td>Min Cell Voltage (raw)</td><td>×0.001 V</td><td>OK</td></tr>
+<tr><td>4899</td><td>1329</td><td>Min Cell Index</td><td>-</td><td></td></tr>
+<tr><td>4900</td><td>132A</td><td>Cell Count</td><td>-</td><td></td></tr>
+<tr><td>4901</td><td>132B</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>4902</td><td>132C</td><td>NTC Count</td><td>-</td><td></td></tr>
+<tr><td>4903</td><td>132D</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>4904</td><td>132E</td><td>Temp (min/avg/max)</td><td>°C</td><td></td></tr>
+<tr><td>4905</td><td>132F</td><td>Temp (min/avg/max)</td><td>°C</td><td></td></tr>
+</table>
+</div>
 
---------------------------------------------------------------
- STATUS / LIMITS BLOCK (Start 0x2320 = 8992) – Länge 64 Register
---------------------------------------------------------------
-REQUEST: 01 03 23 20 00 40 4E 74 
-(01 Slave‑ID, 03 Read Holding Registers, 23 20 Startadresse (8992), 00 40 Anzahl Register = 64, 4E 74 CRC‑16)
-Dec     Hex     Beschreibung                         Skalierung        Verified
-8992    2320    Status                                -
-8993    2321    -
-8994    2322    Charge Limit (A×10)                   ×0.1 A
-8995    2323    NTC Count                             -
-8996    2324    Min Cell Voltage (raw)                ×0.001 V
-8997    2325    Cell High Alarm                       ×0.001 V
-8998    2326    Cell High Alarm Back                  ×0.001 V
-8999    2327    -
-9000    2328    -
-9001    2329    Max Cell Voltage (Soll)               ×0.001 V        OK
-9002    232A    95% SoC Voltage                       ×0.001 V        OK
-9003    232B    5% SoC Voltage                        ×0.001 V        OK
-9004    232C    Empty Voltage                         ×0.001 V        OK
-9005    232D    Cell High Alarm                       ×0.001 V        OK
-9006    232E    Temp High Alarm                       °C?
-9007    232F    Temperatur                            °C
-9008–9023        Diverse interne Werte                -
+<hr>
 
--- Temperatur-Rohwerte
-9024    2360    Temp raw 1                            -
-9025    2361    Temp raw 2                            -
-9026    2362    Temp raw 3                            -
-9027    2363    Temp raw 4                            -
-9028    2364    Temp raw 5                            -
-9029    2365    Temp raw 6                            -
-9030    2366    Temp raw 7                            -
-9031    2367    Temp raw 8                            -
+<div class="section">
+<h2>🔋 Cell Info Block</h2>
+<p><strong>Start:</strong> 0x132A (= 4906)<br>
+<strong>Länge:</strong> 32 Register</p>
 
--- Stromlimits
-9032    2370    Charge Limit                          ×0.1 A
-9033    2371    Charge Limit Back                     ×0.1 A
-9034    2372    Discharge Limit                       ×0.1 A
+<h3>📤 Request</h3>
+<pre><code>01 03 13 2A 00 20 61 5E</code></pre>
 
-9035–9055        Fehlerflags / Statusbits             -
+<table>
+<tr><th>Dec</th><th>Hex</th><th>Beschreibung</th><th>Skalierung</th><th>Verified</th></tr>
+<tr><td>4906</td><td>132A</td><td>Max Cell Voltage (raw)</td><td>×0.001 V</td><td></td></tr>
+<tr><td>4907</td><td>132B</td><td>Max Cell Index</td><td>-</td><td></td></tr>
+<tr><td>4908</td><td>132C</td><td>Min Cell Voltage (raw)</td><td>×0.001 V</td><td></td></tr>
+<tr><td>4909</td><td>132D</td><td>Min Cell Index</td><td>-</td><td></td></tr>
+<tr><td>4910</td><td>132E</td><td>Temp Sensor 1</td><td>°C</td><td>OK</td></tr>
+<tr><td>4911</td><td>132F</td><td>Temp Sensor 2</td><td>°C</td><td>OK</td></tr>
+<tr><td>4912</td><td>1330</td><td>Temp Sensor 3</td><td>°C</td><td>OK</td></tr>
+<tr><td>4913</td><td>1331</td><td>Temp Sensor 4</td><td>°C</td><td>OK</td></tr>
+</table>
 
-==============================================================
+<h3>Zellspannungen (×0.001 V)</h3>
+
+<table>
+<tr><th>Dec</th><th>Hex</th><th>Cell</th><th>Verified</th></tr>
+<tr><td>4914</td><td>1332</td><td>Cell 1</td><td>OK</td></tr>
+<tr><td>4915</td><td>1333</td><td>Cell 2</td><td>OK</td></tr>
+<tr><td>4916</td><td>1334</td><td>Cell 3</td><td>OK</td></tr>
+<tr><td>4917</td><td>1335</td><td>Cell 4</td><td>OK</td></tr>
+<tr><td>4918</td><td>1336</td><td>Cell 5</td><td>OK</td></tr>
+<tr><td>4919</td><td>1337</td><td>Cell 6</td><td>OK</td></tr>
+<tr><td>4920</td><td>1338</td><td>Cell 7</td><td>OK</td></tr>
+<tr><td>4921</td><td>1339</td><td>Cell 8</td><td>OK</td></tr>
+<tr><td>4922</td><td>133A</td><td>Cell 9</td><td>OK</td></tr>
+<tr><td>4923</td><td>133B</td><td>Cell 10</td><td>OK</td></tr>
+<tr><td>4924</td><td>133C</td><td>Cell 11</td><td>OK</td></tr>
+<tr><td>4925</td><td>133D</td><td>Cell 12</td><td>OK</td></tr>
+<tr><td>4926</td><td>133E</td><td>Cell 13</td><td>OK</td></tr>
+<tr><td>4927</td><td>133F</td><td>Cell 14</td><td>OK</td></tr>
+<tr><td>4928</td><td>1340</td><td>Cell 15</td><td>OK</td></tr>
+<tr><td>4929</td><td>1341</td><td>Cell 16</td><td>OK</td></tr>
+</table>
+</div>
+
+<hr>
+
+<div class="section">
+<h2>⚙️ Status / Limits Block</h2>
+<p><strong>Start:</strong> 0x2320 (= 8992)<br>
+<strong>Länge:</strong> 64 Register</p>
+
+<h3>📤 Request</h3>
+<pre><code>01 03 23 20 00 40 4E 74</code></pre>
+<p>01 Slave‑ID, 03 Read Holding Registers, 23 20 Startadresse, 00 40 Anzahl Register, 4E 74 CRC‑16</p>
+
+<table>
+<tr><th>Dec</th><th>Hex</th><th>Beschreibung</th><th>Skalierung</th><th>Verified</th></tr>
+<tr><td>8992</td><td>2320</td><td>Status</td><td>-</td><td></td></tr>
+<tr><td>8993</td><td>2321</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>8994</td><td>2322</td><td>Charge Limit (A×10)</td><td>×0.1 A</td><td></td></tr>
+<tr><td>8995</td><td>2323</td><td>NTC Count</td><td>-</td><td></td></tr>
+<tr><td>8996</td><td>2324</td><td>Min Cell Voltage (raw)</td><td>×0.001 V</td><td></td></tr>
+<tr><td>8997</td><td>2325</td><td>Cell High Alarm</td><td>×0.001 V</td><td></td></tr>
+<tr><td>8998</td><td>2326</td><td>Cell High Alarm Back</td><td>×0.001 V</td><td></td></tr>
+<tr><td>8999</td><td>2327</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>9000</td><td>2328</td><td>-</td><td>-</td><td></td></tr>
+<tr><td>9001</td><td>2329</td><td>Max Cell Voltage (Soll)</td><td>×0.001 V</td><td>OK</td></tr>
+<tr><td>9002</td><td>232A</td><td>95% SoC Voltage</td><td>×0.001 V</td><td>OK</td></tr>
+<tr><td>9003</td><td>232B</td><td>5% SoC Voltage</td><td>×0.001 V</td><td>OK</td></tr>
+<tr><td>9004</td><td>232C</td><td>Empty Voltage</td><td>×0.001 V</td><td>OK</td></tr>
+<tr><td>9005</td><td>232D</td><td>Cell High Alarm</td><td>×0.001 V</td><td>OK</td></tr>
+<tr><td>9006</td><td>232E</td><td>Temp High Alarm</td><td>°C?</td><td></td></tr>
+<tr><td>9007</td><td>232F</td><td>Temperatur</td><td>°C</td><td></td></tr>
+<tr><td>9008–9023</td><td>2330–233F</td><td>Diverse interne Werte</td><td>-</td><td></td></tr>
+</table>
+
+<h3>🌡️ Temperatur‑Rohwerte</h3>
+
+<table>
+<tr><th>Dec</th><th>Hex</th><th>Beschreibung</th></tr>
+<tr><td>9024</td><td>2360</td><td>Temp raw 1</td></tr>
+<tr><td>9025</td><td>2361</td><td>Temp raw 2</td></tr>
+<tr><td>9026</td><td>2362</td><td>Temp raw 3</td></tr>
+<tr><td>9027</td><td>2363</td><td>Temp raw 4</td></tr>
+<tr><td>9028</td><td>2364</td><td>Temp raw 5</td></tr>
+<tr><td>9029</td><td>2365</td><td>Temp raw 6</td></tr>
+<tr><td>9030</td><td>2366</td><td>Temp raw 7</td></tr>
+<tr><td>9031</td><td>2367</td><td>Temp raw 8</td></tr>
+</table>
+
+<h3>⚡ Stromlimits</h3>
+
+<table>
+<tr><th>Dec</th><th>Hex</th><th>Beschreibung</th><th>Skalierung</th></tr>
+<tr><td>9032</td><td>2370</td><td>Charge Limit</td><td>×0.1 A</td></tr>
+<tr><td>9033</td><td>2371</td><td>Charge Limit Back</td><td>×0.1 A</td></tr>
+<tr><td>9034</td><td>2372</td><td>Discharge Limit</td><td>×0.1 A</td></tr>
+</table>
+
+<h3>⚠️ Fehlerflags / Statusbits</h3>
+<p>Registerbereich: <strong>9035–9055</strong> (0x2373–0x238F)</p>
+
+</div>
+
+<hr>
+
+</body>
+</html>
